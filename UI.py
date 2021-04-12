@@ -49,7 +49,7 @@ class SafeData:
         #Campo del precio del articulo
         self.label2=ttk.Label(self.form1, text="Precio del articulo:")
         self.label2.grid(column=0, row=1, padx=4, pady=4)
-        self.precio=tk.StringVar()
+        self.precio=tk.IntVar()
         self.entryPrecio=ttk.Entry(self.form1, textvariable=self.precio, width=58)
         self.entryPrecio.grid(column=1, row=1, padx=4, pady=4)
 
@@ -77,7 +77,7 @@ class SafeData:
         #Campo del ID del articulo
         self.label1=ttk.Label(self.form2, text="ID del articulo:")
         self.label1.grid(column=0, row=0, padx=4, pady=4)
-        self.id=tk.StringVar()
+        self.id=tk.IntVar()
         self.entryid=ttk.Entry(self.form2, textvariable=self.id, width=25)
         self.entryid.grid(column=1, row=0, padx=4, pady=4)
 
@@ -100,7 +100,7 @@ class SafeData:
         #Precio
         self.label3=ttk.Label(self.form3, text="Precio del articulo:")
         self.label3.grid(column=0, row=2, padx=4, pady=4)
-        self.precio=tk.StringVar()
+        self.precio=tk.IntVar()
         self.entryPrecio=ttk.Entry(self.form3, textvariable=self.precio, state="readonly")
         self.entryPrecio.grid(column=1, row=2, padx=4, pady=4)
 
@@ -142,7 +142,7 @@ class SafeData:
         #Campo de los datos
         self.label1=ttk.Label(self.form5, text="ID del articulo:")
         self.label1.grid(column=0, row=0, padx=4, pady=4)
-        self.id=tk.StringVar()
+        self.id=tk.IntVar()
         self.entryid=ttk.Entry(self.form5, textvariable=self.id, width=60)
         self.entryid.grid(column=1, row=0, padx=4, pady=4)
 
@@ -163,7 +163,7 @@ class SafeData:
         #Campo del ID del producto
         self.label1=ttk.Label(self.form6, text="ID del articulo:")
         self.label1.grid(column=0, row=0, padx=4, pady=4)
-        self.id=tk.StringVar()
+        self.id=tk.IntVar()
         self.entryid=ttk.Entry(self.form6, textvariable=self.id, width=25)
         self.entryid.grid(column=1, row=0, padx=4, pady=4)
 
@@ -184,7 +184,7 @@ class SafeData:
         #Precio
         self.label3=ttk.Label(self.form7, text="Precio del articulo:")
         self.label3.grid(column=0, row=1, padx=4, pady=4)
-        self.precio=tk.StringVar()
+        self.precio=tk.IntVar()
         self.entryPrecio=ttk.Entry(self.form7, textvariable=self.precio)
         self.entryPrecio.grid(column=1, row=1, padx=4, pady=4)
 
