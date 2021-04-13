@@ -69,20 +69,30 @@ class SafeData:
     #funcion para crear articulos
     def crearArticulo(self):
 
-        #Guardar lo obtenido en una tupla
-        datos=(self.nombreCrear.get(), self.precioCrear.get(), self.descripcionCrear.get())
+        try:
+            #Guardar lo obtenido en una tupla
+            datos=(self.nombreCrear.get(), self.precioCrear.get(), self.descripcionCrear.get())
 
-        #Mandar lo obtenido
-        self.articulo1.crear(datos)
+            if self.nombreCrear.get() == '' or self.precioCrear.get() == '' or self.descripcionCrear.get() == '':
+                mb.showerror("Error", "Debes llenar todos los campos")
+            else:
+                #Mandar lo obtenido
+                self.articulo1.crear(datos)
 
-        #Mostrar mensaje de exito
-        mb.showinfo("Información", "Los datos fueron cargados")
+                #Mostrar mensaje de exito
+                mb.showinfo("Información", "Los datos fueron cargados")
 
-        #Volver a dejar los valores en blanco
-        self.nombreCrear.set("")
-        self.precioCrear.set("")
-        self.descripcionCrear.set("")
-    
+                #Volver a dejar los valores en blanco
+                self.nombreCrear.set("")
+                self.precioCrear.set("")
+                self.descripcionCrear.set("")
+
+        except:
+            mb.showerror("Error", "Debes ingresar un número")
+            self.nombreCrear.set("")
+            self.precioCrear.set("")
+            self.descripcionCrear.set("")
+
     def consultar(self):
 
         #Agregar la pestaña consultar a la interface
@@ -136,11 +146,23 @@ class SafeData:
             #Obtenemos el ID
             datos=(self.idConsulta.get(), )
 
-            #Ejecutamos la consulta con el ID, nos devolvera una tupla con los datos requeridos
-            respuesta=self.articulo1.consulta(datos)
+            if self.idConsulta.get() == '':
+                mb.showerror("Error", "Debes ingresar un ID")
+                self.idConsulta.set('')
+                self.nombreConsulta.set('')
+                self.precioConsulta.set('')
+                self.descripcionConsulta.set('')
+
+            else:
+                #Ejecutamos la consulta con el ID, nos devolvera una tupla con los datos requeridos
+                respuesta=self.articulo1.consulta(datos)
+
         except:
-            mb.showerror("Error", "Debes ingresar un número")
+            mb.showerror("Error", "Debes ingresar un número o un ID")
             self.idConsulta.set('')
+            self.nombreConsulta.set('')
+            self.precioConsulta.set('')
+            self.descripcionConsulta.set('')
         
         #Llenara los campos del articulo
         if len(respuesta)>0:
@@ -166,7 +188,7 @@ class SafeData:
         self.form4.grid(column=0, row=0, padx=5, pady=10)
 
         #Boton
-        self.boton1=ttk.Button(self.form4, text="Listar", command=self.listarArticulos)
+        self.boton1=ttk.Button(self.form4, text="Actualizar", command=self.listarArticulos)
         self.boton1.grid(column=0, row=0, padx=4, pady=4)
 
         #Area de listado
@@ -213,15 +235,20 @@ class SafeData:
             #Obtenemos el id
             datos=(self.idBorrar.get(), )
 
-            #Obtenemos datos de la consulta
-            cantidad=self.articulo1.borrar(datos)
+            if self.idBorrar.get() == '':
+                mb.showerror("Error", "Debes ingresar un ID")
+            else:
+                #Obtenemos datos de la consulta
+                cantidad=self.articulo1.borrar(datos)
+            
         except:
             mb.showerror("Error", "Debes ingresar un número")
-            self.idActualizar.set('')
+            self.idBorrar.set('')
 
         #Mostramos mensaje en pantalla
         if cantidad==1:
             mb.showinfo("Información", "Se borró el artículo con dicho código")
+            self.idBorrar.set('')
         else:
             mb.showinfo("Información", "No existe un artículo con dicho código")
 
@@ -275,8 +302,20 @@ class SafeData:
 
     def actualizarArticulo(self):
 
-        datos=(self.nombreActualizar.get(), self.precioActualizar.get(), self.descripcionActualizar.get(), self.idActualizar.get())
-        cantidad=self.articulo1.modificacion(datos)
+        try:
+            #Obtenemos los datos
+            datos=(self.nombreActualizar.get(), self.precioActualizar.get(), self.descripcionActualizar.get(), self.idActualizar.get())
+            
+            if self.nombreActualizar.get() == '' or self.precioActualizar.get() == '' or self.descripcionActualizar.get() == '':
+                mb.showerror("Error", "Debes llenar todos los campos.")
+            else:
+                cantidad=self.articulo1.modificacion(datos)
+
+        except:
+            mb.showerror("Error", "Posibles errores:\nPrimero debes ingresar el ID del articulo.\nDebes llenar todos los campos.\nEn el campo de precio, debes ingresar un numero.")
+            self.nombreActualizar.set('')
+            self.precioActualizar.set('')
+            self.descripcionActualizar.set('')
 
         if cantidad==1:
             mb.showinfo("Información", "Se modificó el artículo")
@@ -285,7 +324,7 @@ class SafeData:
             self.precioActualizar.set('')
             self.descripcionActualizar.set('')
         else:
-            mb.showinfo("Información", "No existe un artículo con dicho código")
+            mb.showerror("Error", "Posibles errores:\nNo se ha actualizado nada.")
     
     def consultaActualizar(self):
 
@@ -293,10 +332,14 @@ class SafeData:
             #Obtenemos el ID
             datos=(self.idActualizar.get(), )
 
-            #Ejecutamos la consulta con el ID, nos devolvera una tupla con los datos requeridos
-            respuesta=self.articulo1.consulta(datos)
+            if self.idActualizar.get() == '':
+                mb.showerror("Error", "Debes ingresar un ID")
+            else:
+                #Ejecutamos la consulta con el ID, nos devolvera una tupla con los datos requeridos
+                respuesta=self.articulo1.consulta(datos)
+
         except:
-            mb.showerror("Error", "Debes ingresar un número")
+            mb.showerror("Error", "Debes ingresar un número o un ID")
             self.idActualizar.set('')
         
         #Llenara los campos del articulo
