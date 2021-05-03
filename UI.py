@@ -79,8 +79,10 @@ class SafeData:
                 #Mandar lo obtenido
                 self.articulo1.crear(datos)
 
+                res = self.articulo1.mostrarID(datos)
+
                 #Mostrar mensaje de exito
-                mb.showinfo("Información", "Los datos fueron cargados")
+                mb.showinfo("Información", f"El articulo se ha guardado con el ID {res[0][0]}")
 
                 #Volver a dejar los valores en blanco
                 self.nombreCrear.set("")

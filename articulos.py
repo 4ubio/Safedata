@@ -96,3 +96,19 @@ class Articulos:
         connect.close()
 
         return cursor.rowcount
+    
+    def mostrarID(self, datos):
+
+        #Nos conectamos
+        connect=self.conectar()
+
+        #Creamos un cursos
+        cursor=connect.cursor()
+
+        #Escribimos el query
+        sql="SELECT id FROM Articulos WHERE nombre=%s AND precio=%s AND descripcion=%s"
+
+        #Ejecutamos el query
+        cursor.execute(sql, datos)
+
+        return cursor.fetchall()
