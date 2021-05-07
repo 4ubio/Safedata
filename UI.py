@@ -51,7 +51,7 @@ class SafeData:
         #Campo del precio del articulo
         self.label2=ttk.Label(self.form1, text="Precio del articulo:")
         self.label2.grid(column=0, row=1, padx=4, pady=4)
-        self.precioCrear=tk.IntVar()
+        self.precioCrear=tk.DoubleVar()
         self.entryPrecio=ttk.Entry(self.form1, textvariable=self.precioCrear, width=58)
         self.entryPrecio.grid(column=1, row=1, padx=4, pady=4)
 
@@ -70,6 +70,7 @@ class SafeData:
     def crearArticulo(self):
 
         try:
+
             #Guardar lo obtenido en una tupla
             datos=(self.nombreCrear.get(), self.precioCrear.get(), self.descripcionCrear.get())
 
@@ -90,7 +91,7 @@ class SafeData:
                 self.descripcionCrear.set("")
 
         except:
-            mb.showerror("Error", "Debes ingresar un número")
+            mb.showerror("Error", "Debes ingresar un número en el campo de precio")
             self.nombreCrear.set("")
             self.precioCrear.set("")
             self.descripcionCrear.set("")
@@ -131,7 +132,7 @@ class SafeData:
         #Precio
         self.label3=ttk.Label(self.form3, text="Precio del articulo:")
         self.label3.grid(column=0, row=2, padx=4, pady=4)
-        self.precioConsulta=tk.IntVar()
+        self.precioConsulta=tk.DoubleVar()
         self.entryPrecio=ttk.Entry(self.form3, textvariable=self.precioConsulta, state="readonly")
         self.entryPrecio.grid(column=1, row=2, padx=4, pady=4)
 
@@ -176,7 +177,7 @@ class SafeData:
             self.nombreConsulta.set('')
             self.precioConsulta.set('')
             self.descripcionConsulta.set('')
-            mb.showinfo("Información", "No existe un artículo con dicho código")
+            mb.showinfo("Información", "No existe un artículo con dicho ID")
 
     
     def listar(self):
@@ -249,10 +250,10 @@ class SafeData:
 
         #Mostramos mensaje en pantalla
         if cantidad==1:
-            mb.showinfo("Información", "Se borró el artículo con dicho código")
+            mb.showinfo("Información", "Se borró el artículo con dicho ID")
             self.idBorrar.set('')
         else:
-            mb.showinfo("Información", "No existe un artículo con dicho código")
+            mb.showinfo("Información", "No existe un artículo con dicho ID")
 
     def actualizar(self):
 
@@ -288,7 +289,7 @@ class SafeData:
         #Precio
         self.label3=ttk.Label(self.form7, text="Precio del articulo:")
         self.label3.grid(column=0, row=1, padx=4, pady=4)
-        self.precioActualizar=tk.IntVar()
+        self.precioActualizar=tk.DoubleVar()
         self.entryPrecio=ttk.Entry(self.form7, textvariable=self.precioActualizar)
         self.entryPrecio.grid(column=1, row=1, padx=4, pady=4)
 
@@ -314,7 +315,7 @@ class SafeData:
                 cantidad=self.articulo1.modificacion(datos)
 
         except:
-            mb.showerror("Error", "Posibles errores:\nPrimero debes ingresar el ID del articulo.\nDebes llenar todos los campos.\nEn el campo de precio, debes ingresar un numero.")
+            mb.showerror("Error", "Aviso:\nPrimero debes ingresar el ID del articulo.\nDebes llenar todos los campos.\nEn el campo de precio, debes ingresar un numero.")
             self.nombreActualizar.set('')
             self.precioActualizar.set('')
             self.descripcionActualizar.set('')
@@ -326,7 +327,7 @@ class SafeData:
             self.precioActualizar.set('')
             self.descripcionActualizar.set('')
         else:
-            mb.showerror("Error", "Posibles errores:\nNo se ha actualizado nada.")
+            mb.showerror("Error", "Aviso:\nNo se ha actualizado nada.")
     
     def consultaActualizar(self):
 
@@ -354,7 +355,7 @@ class SafeData:
             self.nombreActualizar.set('')
             self.precioActualizar.set('')
             self.descripcionActualizar.set('')
-            mb.showinfo("Información", "No existe un artículo con dicho código")
+            mb.showinfo("Información", "No existe un artículo con dicho ID")
 
 
 userInterface = SafeData()
